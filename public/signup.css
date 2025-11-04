@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.form-container {
+    text-align: center;
+}
+
+#sign-up {
+    display: inline-block;
+    padding: 1rem;
+    border: 2px solid #888;
+}
+
+.form-body-main {
+    display: grid;
+    gap: 1rem;
+}
+
+
+
+

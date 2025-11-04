@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/signup.css">
+        <title><%= title %></title>
+    </head>
+    <body>
+        <main>
+            <h1><%= header %></h1>
+            <div class="form-container">
+                <form action="/sign-up" method="post" id="sign-up">
+                    <div class="form-body-main">
+                        <div>
+                            <label for="userName">username: </label>
+                            <input type="text" name="username" id="userName">
+                        </div>
+                        <div>
+                            <label for="email">email: </label>
+                            <input type="email" name="email" id="email">
+                        </div>
+                        <div>
+                            <label for="password">password: </label>
+                            <input type="password" name="password" id="password">
+                        </div>
+                        <div>
+                            <label for="confirm">confirm password: </label>
+                            <input type="password" name="confirmPassword" id="confirm">
+                        </div>
+                    </div>
+                    <div class="form-body-footer">
+                        <p>You already have an account ? <a href="/log-in">log in</a></p>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

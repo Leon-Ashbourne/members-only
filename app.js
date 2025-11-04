@@ -1,0 +1,26 @@
+const express = require("express");
+const signupRouter = require("./routes/signupRouter");
+const path = require("node:path");
+
+const app = express();
+
+//views 
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+//assets
+const assetsPath = path.join(__dirname, "public");
+app.use(express.static(assetsPath));
+
+// home route
+app.use("/sign-up", signupRouter);
+app.get("/", (req, res) => {
+    res.send("Hello, World!");
+})
+
+const PORT = 3000;
+app.listen(PORT, (error) => {
+    if(error) throw error;
+
+    console.log(`Successfully listening at port: ${PORT}`);
+})
