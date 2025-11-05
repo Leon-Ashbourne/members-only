@@ -22,14 +22,17 @@
                     </div>
                     <div>
                         <label for="confirm">confirm password: </label>
-                        <input type="password" name="confirmPassword" id="confirm">
+                        <input type="password" name="confirm-password" id="confirm">
                     </div>
-                    <button type="button">Sign up</button>
+                    <button type="submit">Sign up</button>
                 </div>
                 <div class="form-body-footer">
                     <p>You already have an account ? <a href="/log-in">log in</a></p>
                 </div>
             </form>
+            <%if(locals.errors) {%>
+                <%- include("error")%>
+            <%}%>
         </main>
     </body>
 </html>
