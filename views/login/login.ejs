@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/login.css">
+        <title><%= title %></title>
+    </head>
+    <body>
+        <main>
+            <h1><%= header %></h1>
+            <form action="/log-in" method="get" id="log-in">
+                <div class="form-main-body">
+                    <div>
+                        <label for="username">username: </label>
+                        <input type="text" name="username" id="username" required>
+                    </div>
+                    <div>
+                        <label for="password">password</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    <button type="submit">Sign in</button>
+                </div>
+                <div class="form-main-footer">
+                    <p>Don't have an account? <a href="/sign-up">Sign up</a></p>
+                </div>
+            </form>
+        </main>
+    </body>
+</html>

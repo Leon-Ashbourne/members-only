@@ -7,19 +7,18 @@ main {
     text-align: center;
 }
 
-#sign-up {
+#log-in {
     display: inline-block;
-    padding: 1rem;
-    border: 2px solid #888;
+    padding: 1.5rem;
+    border: 1px solid #888;
 }
 
-.form-body-main {
+.form-main-body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
-
 
 
 

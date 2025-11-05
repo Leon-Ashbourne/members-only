@@ -1,6 +1,9 @@
 const express = require("express");
+const session = require("express-session");
 const signupRouter = require("./routes/signupRouter");
 const path = require("node:path");
+const loginRouter = require("./routes/loginRouter");
+
 
 const app = express();
 
@@ -14,6 +17,7 @@ app.use(express.static(assetsPath));
 
 // home route
 app.use("/sign-up", signupRouter);
+app.use("/log-in", loginRouter);
 app.get("/", (req, res) => {
     res.send("Hello, World!");
 })
