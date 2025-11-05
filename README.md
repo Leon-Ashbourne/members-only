@@ -1,4 +1,4 @@
-# Membory only
+# Members only
 A simple members-only project. Only the privilaged can move freely. 
 
 ## Prerequisites
