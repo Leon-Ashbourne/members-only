@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <%if(locals.currentUser){%>
+            <a href="/log-out">log out</a>
+        <%}%>
+        <h1><%= header %></h1>
+        <h2>Messages: </h2>
+    </body>
+</html>
