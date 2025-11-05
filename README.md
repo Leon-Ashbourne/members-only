@@ -12,4 +12,4 @@ You are advised to include your own **.env** file configured appropriately for y
 Congrats, you are all set to run the application. 
 
 ## conclusion
-This is an assignment done as per instructed from [The odin Project](https://www.theodinproject.com/lessons/node-path-nodejs-members-only)
+This is an assignment done following the instructions from [The odin Project](https://www.theodinproject.com/lessons/node-path-nodejs-members-only)
