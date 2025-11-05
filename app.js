@@ -8,6 +8,8 @@ const dotenv = require("dotenv");
 const passport = require("./passport/passport");
 const sessionStore = require("connect-pg-simple")(session);
 const pool = require("./models/pool");
+const logoutRouter = require("./routes/logoutRouter");
+const homeRouter = require("./routes/homeRouter");
 
 
 const app = express();
@@ -32,7 +34,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new sessionStore({
-        pool: pool
+        pool: pool,
+        createTableIfMissing: true
     })
 }));
 app.use(passport.session());
@@ -41,9 +44,11 @@ app.use(passport.session());
 // routers
 app.use("/sign-up", signupRouter);
 app.use("/log-in", loginRouter);
-app.get("/", (req, res) => {
-    res.send("Hello, World!");
-})
+app.use("/log-out", (req, res, next) => {
+    req.method = "post";
+    next();
+}, logoutRouter);
+app.get("/", homeRouter);
 
 const PORT = 3000;
 app.listen(PORT, (error) => {
