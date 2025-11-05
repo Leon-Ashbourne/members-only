@@ -5,6 +5,10 @@ const path = require("node:path");
 const loginRouter = require("./routes/loginRouter");
 const process = require("node:process");
 const dotenv = require("dotenv");
+const passport = require("./passport/passport");
+const sessionStore = require("connect-pg-simple")(session);
+const pool = require("./models/pool");
+
 
 const app = express();
 dotenv.config();
@@ -23,12 +27,16 @@ const { SESSION_SECRET } = process.env;
 app.use(session({
     secret: SESSION_SECRET,
     cookie: {
-        maxAge: 1000*60*60*24*31,
-        key: "checking"
+        maxAge: 1000*60*60*24*31
     },
     resave: false,
-    saveUninitialized: false
-}))
+    saveUninitialized: false,
+    store: new sessionStore({
+        pool: pool
+    })
+}));
+app.use(passport.session());
+
 
 // routers
 app.use("/sign-up", signupRouter);
