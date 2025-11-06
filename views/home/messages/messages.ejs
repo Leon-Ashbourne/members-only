@@ -1,0 +1,23 @@
+<section>
+    <ul>
+        <% messages.forEach((message) => {%>
+            <li>
+                <div class="message-container">
+                    <%if(message.status) {%>
+                        <h3><%= message.username %></h3>
+                    <%}else{%>
+                        <h3>unknown</h3>
+                    <%}%>
+                    <span><%= message.date %></span>
+                    <div class="message-content">
+                        <span><%= message.title %></span>
+                        <p><%= message.message %></p>
+                    </div>
+                    <%if(message.status && message.status === "admin") {%>
+                        <%- include("message.admin")%>
+                    <%}%>
+                </div>
+            </li>    
+        <%})%>
+    </ul>
+</section>

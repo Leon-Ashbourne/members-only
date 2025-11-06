@@ -16,6 +16,17 @@ exports.userGet = async ( username ) => {
     return rows;
 }
 
+exports.messagesGet = async () => {
+    const SQL = `
+        SELECT username, title, message, date, status FROM user_details AS ud
+        INNER JOIN user_messages AS um ON ud.id = um.user_id
+        LEFT JOIN membership AS m ON um.user_id = m.user_id;
+    `;
+
+    const { rows } = await pool.query(SQL);
+    return rows;
+}
+
 exports.userSignupPost = async ( username, email, password ) => {
     const SQL = `
         INSERT INTO user_details (username, email, password)
@@ -23,3 +34,7 @@ exports.userSignupPost = async ( username, email, password ) => {
     `;
     await pool.query(SQL, [username, email, password]);
 };
+
+exports.userMessagePost = async (user_id, title, message) => {
+    //
+}
