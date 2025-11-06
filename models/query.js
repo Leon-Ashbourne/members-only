@@ -36,5 +36,16 @@ exports.userSignupPost = async ( username, email, password ) => {
 };
 
 exports.userMessagePost = async (user_id, title, message) => {
-    //
+
+    const SQL2 = `
+        INSERT INTO user_messages (user_id, message, title, date)
+        VALUES ($1, $2, $3, $4);
+    `;
+
+    const currentDate = new Date();
+    const dateFormatted = `
+        ${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}
+    `;
+
+    await pool.query(SQL2, [user_id, message, title, dateFormatted]);
 }

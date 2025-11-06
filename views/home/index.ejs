@@ -3,11 +3,32 @@
         <title><%= title %></title>
     </head>
     <body>
-        <%if(locals.currentUser){%>
-            <a href="/log-out">log out</a>
-        <%}%>
-        <h1><%= header %></h1>
-        <h2>Messages: </h2>
-        <%- include("messages/messages") %>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/add-message">
+                        <button>Add message</button>
+                    </a>
+                </li>
+                <%if(locals.currentUser){%>
+                    <li>
+                        <a href="/log-out">
+                            <button type="submit">log out</button>
+                        </a>
+                    </li>
+                <%} else{%>
+                    <li>
+                        <a href="/log-in">
+                            <button type="submit">log in</button>
+                        </a>
+                    </li>
+                <%}%>
+            </ul>
+        </nav>
+        <main>
+            <h1><%= header %></h1>
+            <h2>Messages: </h2>
+            <%- include("messages/messages") %>
+        </main>
     </body>
 </html>

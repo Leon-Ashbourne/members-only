@@ -10,6 +10,7 @@ const sessionStore = require("connect-pg-simple")(session);
 const pool = require("./models/pool");
 const logoutRouter = require("./routes/logoutRouter");
 const homeRouter = require("./routes/homeRouter");
+const messageRouter = require("./routes/messageRouter");
 
 
 const app = express();
@@ -48,6 +49,7 @@ app.use("/log-out", (req, res, next) => {
     req.method = "post";
     next();
 }, logoutRouter);
+app.use("/add-message", messageRouter);
 app.get("/", homeRouter);
 
 const PORT = 3000;

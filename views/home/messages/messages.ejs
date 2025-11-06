@@ -5,12 +5,14 @@
                 <div class="message-container">
                     <%if(message.status) {%>
                         <h3><%= message.username %></h3>
-                    <%}else{%>
+                    <%}else if(locals.currentUser && message.username === locals.currentUser.username){%>
+                        <h3><%= message.username %></h3>
+                    <%} else{%>
                         <h3>unknown</h3>
                     <%}%>
                     <span><%= message.date %></span>
                     <div class="message-content">
-                        <span><%= message.title %></span>
+                        <span><strong><%= message.title %></strong></span>
                         <p><%= message.message %></p>
                     </div>
                     <%if(message.status && message.status === "admin") {%>

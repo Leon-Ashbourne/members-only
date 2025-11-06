@@ -20,4 +20,9 @@ function homeRender(req, res) {
     res.render("home/index.ejs", {title: "members-only", header: `Welcome back ${user}`});
 }
 
-exports.homepageGet = [ homeSetSetUser, homeMessagesGet, homeRender ];
+const homepageGet = [ homeSetSetUser, homeMessagesGet, homeRender ];
+
+module.exports = {
+    homeMessagesGet,
+    homepageGet
+}

@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const homeMessagesGet = require("./homeController").homeMessagesGet;
 
 function loginSetLocalUser(req, res, next) {
     res.locals.currentUser = req.user;
@@ -13,5 +14,5 @@ exports.loginGet = (req, res) =>{
     res.render("login/login", {title: "log in", header: "Log in:"});
 }
 
-exports.loginPost = [loginSetLocalUser, loginRedirect ];
+exports.loginPost = [loginSetLocalUser, homeMessagesGet, loginRedirect ];
 
