@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <%- include("../navbar")%>
+        <main>
+            <h1><%= header %></h1>
+            <section>
+                <form action="/member" method="POST">
+                    <div>
+                        <label for="passkey">Enter the passkey: </label>
+                        <input type="text" id="passkey" name="passkey">
+                    </div>
+                    <button type="submit">Enter</button>
+                    <a href="/">
+                        <button type="button">Cancel</button>
+                    </a>
+                </form>
+                <%if(locals.errors) {%>
+                    <%- include("../errorForm")%>
+                <%}%>
+            </section>
+        </main>
+        <%- include("../footbar")%>
+    </body>
+</html>

@@ -7,18 +7,28 @@ exports.emailGet = async (email) => {
 }
 
 exports.userByIdGet = async (userId) => {
-    const { rows } = await pool.query(`SELECT * FROM user_details WHERE id = $1`, [userId]);
+    const SQL = `
+        SELECT id, username, password, email, status FROM user_details 
+        LEFT JOIN membership ON membership.user_id = user_details.id
+        WHERE id = ($1);
+    `;
+    const { rows } = await pool.query(SQL, [userId]);
     return rows;
 }
 
 exports.userGet = async ( username ) => {
-    const { rows } = await pool.query(`SELECT * FROM user_details WHERE username = ($1)`, [username]);
+    const SQL = `
+        SELECT id, username, password, email, status FROM user_details 
+        LEFT JOIN membership ON membership.user_id = user_details.id
+        WHERE username = ($1);
+    `
+    const { rows } = await pool.query(SQL, [username]);
     return rows;
 }
 
 exports.messagesGet = async () => {
     const SQL = `
-        SELECT username, title, message, date, status FROM user_details AS ud
+        SELECT username, title, message, date FROM user_details AS ud
         INNER JOIN user_messages AS um ON ud.id = um.user_id
         LEFT JOIN membership AS m ON um.user_id = m.user_id;
     `;
@@ -48,4 +58,23 @@ exports.userMessagePost = async (user_id, title, message) => {
     `;
 
     await pool.query(SQL2, [user_id, message, title, dateFormatted]);
+}
+
+exports.membershipPost = async (user_id, status) => {
+    const SQL = `
+        INSERT INTO membership (user_id, status)
+        VALUES ($1, $2);
+    `;
+
+    await pool.query(SQL, [user_id, status]);
+}
+
+exports.membershipUpdate = async (user_id, status) => {
+    const SQL = `
+        UPDATE membership
+        SET status = $1
+        WHERE user_id = $2;
+    `;
+
+    await pool.query(SQL, [status, user_id]);
 }

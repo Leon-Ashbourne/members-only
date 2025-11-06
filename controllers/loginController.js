@@ -7,7 +7,8 @@ function loginSetLocalUser(req, res, next) {
 };
 
 function loginRedirect(req, res) {
-    res.render("home/index.ejs", {title: "Home", header: `Welcome back ${req.user.username}`});
+    // res.render("home/index.ejs", {title: "Home", header: `Welcome back ${req.user.username}`});
+    res.redirect("/");
 }
 
 exports.loginGet = (req, res) =>{

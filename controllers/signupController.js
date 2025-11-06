@@ -54,7 +54,7 @@ exports.signupPost = [
                 title: "Sign up",
                 header: "Sign up:"
             });
-            next(errors);
+            next("error from signup");
         }
 
         next()
@@ -67,7 +67,6 @@ exports.signupPost = [
 
         await query.userSignupPost(username, email, hashedPassword);
         res.redirect("/");
-
     }
 ]
 

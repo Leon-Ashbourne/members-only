@@ -1,10 +1,9 @@
 const query = require("../models/query");
 
 
-function homeSetSetUser(req, res, next) {
+function homeSetUser(req, res, next) {
     if(req.user) {
         res.locals.currentUser = req.user;
-        res.locals.username = req.user.username;
     }
     next();
 }
@@ -16,13 +15,14 @@ async function homeMessagesGet(req, res, next) {
 }
 
 function homeRender(req, res) {
-    const user = res.locals.username || "guest";
+    const user = req.user ? req.user.username: "guest";
     res.render("home/index.ejs", {title: "members-only", header: `Welcome back ${user}`});
 }
 
-const homepageGet = [ homeSetSetUser, homeMessagesGet, homeRender ];
+const homepageGet = [ homeSetUser, homeMessagesGet, homeRender ];
 
 module.exports = {
     homeMessagesGet,
-    homepageGet
+    homepageGet,
+    homeSetUser
 }

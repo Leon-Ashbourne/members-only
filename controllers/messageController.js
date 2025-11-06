@@ -1,5 +1,7 @@
 const query = require("../models/query");
 const { validationResult, body, matchedData } = require("express-validator");
+const homeSetUser = require("./homeController").homeSetUser;
+
 
 function messageCheckSession(req, res, next) {
     if(req.user) next();
@@ -10,7 +12,7 @@ function messageRender(req, res) {
     res.render("home/messages/add", {title: "add", header: "Add new message: "});
 }
 
-exports.messageGet = [ messageCheckSession, messageRender ];
+exports.messageGet = [ homeSetUser, messageCheckSession, messageRender ];
 
 //validate
 const empErr = "must not be empty";
@@ -32,7 +34,7 @@ async function messageAdd(req, res) {
 
     const {title, message } = res.locals.userMsgData;
     const user_id = req.user.id;
-    
+
     await query.userMessagePost(user_id, title, message);
     res.redirect("/");
 }
@@ -42,12 +44,11 @@ exports.messagePost = [
     (req, res, next) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
-            res.status(400).render("views/home/messages/add", {
+            return res.status(400).render("home/messages/add", {
                 errors: errors.array(),
                 title: "add",
                 header: "Add new message: "
             });
-            next(errors);
         }
 
         const { title, message } = matchedData(req);

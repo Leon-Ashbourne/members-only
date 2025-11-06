@@ -9,12 +9,12 @@ passport.use(new LocalStrategy(
             const rows = await query.userGet( username );
             const user = rows[0];
 
-            if(!user) done(null, false, {message: "username is incorrect"});
+            if(!user) return done(null, false, {message: "username is incorrect"});
             
             const hashedPassword = rows[0].password;
             const isMatched = compare(password, hashedPassword);
 
-            if(!isMatched) done(null, false, {message: "password is incorrect"});
+            if(!isMatched) return done(null, false, {message: "password is incorrect"});
 
             done(null, user);
         } catch(err) {

@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <%- include("../navbar")%>
+        <main>
+            <h1><%= header %></h1>
+            <section>
+                <form action="/member-admin" method="POST">
+                    <div>
+                        <label for="passkey">Enter admin passkey: </label>
+                        <input type="text" id="passkey" name="adminPasskey">
+                    </div>
+                    <button type="submit">Enter</button>
+                    <a href="/">
+                        <button type="button">Cancel</button>
+                    </a>
+                </form>
+                <%if(locals.errors) {%>
+                    <%- include("../errorForm")%>
+                <%}%>
+                <%if(locals.error) {%>
+                    <span><%= error %></span>
+                <%}%>
+            </section>
+        </main>
+        <%- include("../footbar")%>
+    </body>
+</html>
