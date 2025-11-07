@@ -22,11 +22,9 @@ const messageLenErr = "must be less than 400 characters";
 const validate = [
     body("title").trim()
         .notEmpty().withMessage(`title ${empErr}`)
-        .escape()
         .isLength({max: 30}).withMessage(`title ${titleLenErr}`),
     body("message").trim()
         .notEmpty().withMessage(`message ${empErr}`)
-        .escape()
         .isLength({max: 400}).withMessage(`message ${messageLenErr}`)
 ]
 

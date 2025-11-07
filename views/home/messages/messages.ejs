@@ -16,7 +16,7 @@
                         <p><%= message.message %></p>
                     </div>
                     <%if(locals.currentUser && currentUser.status === "admin") {%>
-                        <%- include("admin")%>
+                        <%- include("admin", {message: message})%>
                     <%}%>
                 </div>
             </li>    

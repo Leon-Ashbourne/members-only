@@ -1,3 +1,4 @@
-<a href="/delete">
-    <button type="submit">delete</button>
-</a>
+<form action="/delete" method="post">
+    <input type="hidden" name="msgId" value=<%= message.msgid %>>
+    <input type="submit" value="delete">
+</form>

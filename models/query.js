@@ -28,7 +28,7 @@ exports.userGet = async ( username ) => {
 
 exports.messagesGet = async () => {
     const SQL = `
-        SELECT username, title, message, date FROM user_details AS ud
+        SELECT username, title, message, date, um.id as msgId FROM user_details AS ud
         INNER JOIN user_messages AS um ON ud.id = um.user_id
         LEFT JOIN membership AS m ON um.user_id = m.user_id;
     `;
@@ -53,9 +53,7 @@ exports.userMessagePost = async (user_id, title, message) => {
     `;
 
     const currentDate = new Date();
-    const dateFormatted = `
-        ${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}
-    `;
+    const dateFormatted = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
     await pool.query(SQL2, [user_id, message, title, dateFormatted]);
 }
@@ -77,4 +75,13 @@ exports.membershipUpdate = async (user_id, status) => {
     `;
 
     await pool.query(SQL, [status, user_id]);
+}
+
+exports.deleteMessagePost = async (user_id) => {
+    const SQL = `
+        DELETE FROM user_messages
+        WHERE id = $1;
+    `;
+
+    await pool.query(SQL, [user_id]);
 }
